@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="天地图"/>
+    <title>四川旅游资源服务系统</title>
+    <script type="text/javascript" src="http://api.tianditu.gov.cn/api?v=4.0&tk=	acd57afe119d026e134b222dd5c428ca"></script>
+    <style type="text/css">body,html{width:100%;height:100%;margin:0;font-family:"Microsoft YaHei"}#mapDiv{width:100%;height:100%}input,b,p{margin-left:5px;font-size:14px}</style>
+    <script>
+        var map, control;
+        var zoom = 12;
+        function onLoad() {
+            //初始化地图对象
+            map = new T.Map("mapDiv");
+            //设置显示地图的中心点和级别
+            map.centerAndZoom(new T.LngLat(104.06799,30.64736), zoom);
+            //创建缩放平移控件对象
+            control = new T.Control.Zoom();
+            //添加缩放平移控件
+            map.addControl(control);
+            var miniMap = new T.Control.OverviewMap({
+                isOpen: true,
+                size: new T.Point(150, 150)
+            });
+            map.addControl(miniMap);
+             //创建对象
+             var ctrl = new T.Control.MapType();
+            //添加控件
+            map.addControl(ctrl);
+        }
+
+        function ControlsetPosition() {
+            var selectNavPosition = document.getElementById("selectnavposition");
+            var index = selectNavPosition.selectedIndex;
+            var controlPositionStr = selectNavPosition.options[index].value;
+            this.leftTOP = T_ANCHOR_TOP_LEFT;
+            this.rightTOP = T_ANCHOR_TOP_RIGHT;
+            this.leftBOTTOM = T_ANCHOR_BOTTOM_LEFT;
+            this.rightBOTTOM = T_ANCHOR_BOTTOM_RIGHT
+            var controlPosition;
+            if (controlPositionStr == "leftTOP")
+                controlPosition = T_ANCHOR_TOP_LEFT;
+            else if (controlPositionStr == "rightTOP")
+                controlPosition = T_ANCHOR_TOP_RIGHT;
+            else if (controlPositionStr == "leftBOTTOM")
+                controlPosition = T_ANCHOR_BOTTOM_LEFT;
+            else if (controlPositionStr == "rightBOTTOM")
+                controlPosition = T_ANCHOR_BOTTOM_RIGHT;
+            control.setPosition(controlPosition);
+            
+
+        }
+    </script>
+</head>
+<body onLoad="onLoad()">
+<div id="mapDiv"></div>
+</body>
+</html>>
